@@ -8,4 +8,6 @@ public interface ContactService {
     ContactDto addContactToClient(long id, CreateContactDto contactDetails);
 
     ContactsDto getContactsByClientId(long id);
+
+    ContactsDto getContactsByClientIdAndContactType(long id, String contactType);
 }

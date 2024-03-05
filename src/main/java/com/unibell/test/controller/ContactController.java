@@ -27,4 +27,10 @@ public class ContactController {
     ResponseEntity<ContactsDto> getContactsByClientId(@PathVariable long id){
         return new ResponseEntity<>(contactService.getContactsByClientId(id), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/contacts/{contactType}")
+    ResponseEntity<ContactsDto> getContactsByClientId(@PathVariable long id,
+                                                      @PathVariable String contactType){
+        return new ResponseEntity<>(contactService.getContactsByClientIdAndContactType(id, contactType), HttpStatus.OK);
+    }
 }

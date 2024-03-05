@@ -1,6 +1,7 @@
 package com.unibell.test.service.impl;
 
 import com.unibell.test.dto.ContactDto;
+import com.unibell.test.dto.ContactType;
 import com.unibell.test.dto.ContactsDto;
 import com.unibell.test.dto.CreateContactDto;
 import com.unibell.test.entity.ClientEntity;
@@ -36,6 +37,16 @@ public class ContactServiceImpl implements ContactService {
     public ContactsDto getContactsByClientId(long id){
         if (clientRepository.existsById(id)) {
             return new ContactsDto(contactRepository.findByClient_id(id).stream()
+                    .map(contactMapper::contactEntityToContactDto)
+                    .collect(Collectors.toList()));
+        } else throw new ClientIsNotFoundException("Client is not found");
+    }
+
+    @Override
+    public ContactsDto getContactsByClientIdAndContactType(long id, String contactType){
+        ContactType type = ContactType.valueOf(contactType.toUpperCase());
+        if (clientRepository.existsById(id)) {
+            return new ContactsDto(contactRepository.findByClient_idAndContactType(id, type).stream()
                     .map(contactMapper::contactEntityToContactDto)
                     .collect(Collectors.toList()));
         } else throw new ClientIsNotFoundException("Client is not found");
