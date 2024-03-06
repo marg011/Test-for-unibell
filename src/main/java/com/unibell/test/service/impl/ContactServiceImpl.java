@@ -28,7 +28,7 @@ public class ContactServiceImpl implements ContactService {
         ClientEntity clientEntity = clientRepository.findById(id).orElseThrow(() -> new ClientIsNotFoundException("Client is not found"));
         ContactEntity contactEntity = ContactEntity.builder()
                 .client(clientEntity)
-                .contactType(contactDetails.getContactType())
+                .contactType(ContactType.valueOf(contactDetails.getContactType().toUpperCase()))
                 .contactValue(contactDetails.getContactValue()).build();
         contactRepository.save(contactEntity);
         return contactMapper.contactEntityToContactDto(contactEntity);

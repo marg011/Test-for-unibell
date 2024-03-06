@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateContactDto {
-    private ContactType contactType;
+    private String contactType;
     private String contactValue;
 }
